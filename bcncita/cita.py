@@ -5,6 +5,7 @@ import os
 import random
 import re
 import sys
+
 import tempfile
 import time
 from base64 import b64decode
@@ -13,10 +14,7 @@ from datetime import datetime as dt
 from enum import Enum
 from json.decoder import JSONDecodeError
 from typing import Any, Optional
-
 import requests
-from anticaptchaofficial.imagecaptcha import imagecaptcha
-from anticaptchaofficial.recaptchav3proxyless import recaptchaV3Proxyless
 from selenium import webdriver
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.by import By
@@ -25,7 +23,9 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.support.wait import WebDriverWait
 
-from .speaker import new_speaker
+driver = webdriver.Chrome(executable_path=r"C:\dchrome\chromedriver.exe")
+driver.get('https://sede.administracionespublicas.gob.es/icpplus/index.html')
+
 
 __all__ = ["try_cita", "CustomerProfile", "DocType", "OperationType", "Office", "Province"]
 
@@ -33,8 +33,6 @@ CYCLES = 144
 REFRESH_PAGE_CYCLES = 12
 
 DELAY = 30  # timeout for page load
-
-speaker = new_speaker()
 
 
 class DocType(str, Enum):
